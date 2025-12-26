@@ -1,49 +1,49 @@
-# Python Syntax
+# Python 语法
 
-**Python Syntax compared to other programming languages**
+**Python 语法与其他编程语言的比较**
 
-- Python was designed to for readability, and has some similarities to the English language with influence from mathematics.
-- Python uses new lines to complete a command, as opposed to other programming languages which often use semicolons or parentheses.
-- Python relies on indentation, using whitespace, to define scope; such as the scope of loops, functions and classes. Other programming languages often use curly-brackets for this purpose.
+- Python 的设计注重可读性，与英语有一些相似之处，并受到数学的影响。
+- Python 使用换行来完成命令，而其他编程语言通常使用分号或括号。
+- Python 依赖缩进（使用空白字符）来定义作用域，例如循环、函数和类的作用域。其他编程语言通常使用花括号来实现这一目的。
 
-## Python Indentations
+## Python 缩进
 
-Where in other programming languages the indentation in code is for readability only, in Python the indentation is very important.
+在其他编程语言中，代码缩进仅用于提高可读性，但在 Python 中，缩进非常重要。
 
-Python uses indentation to indicate a block of code.
+Python 使用缩进来表示代码块。
 
 ```python
 if 5 > 2:
   print("Five is greater than two!")
 ```
 
-Python will give you an error if you skip the indentation.
+如果跳过缩进，Python 会报错。
 
-## Comments
+## 注释
 
-Python has commenting capability for the purpose of in-code documentation.
+Python 具有注释功能，用于代码内文档说明。
 
-Comments start with a `#`, and Python will render the rest of the line as a comment:
+注释以 `#` 开头，Python 会将该行的其余部分视为注释：
 
 ```python
-#This is a comment.
+#这是一条注释。
 print("Hello, World!")
 ```
 
-## Docstrings
+## 文档字符串
 
-Python also has extended documentation capability, called docstrings.
+Python 还具有扩展的文档功能，称为文档字符串（docstrings）。
 
-Docstrings can be one line, or multiline. Docstrings are also comments:
+文档字符串可以是单行或多行的。文档字符串也是注释：
 
-Python uses triple quotes at the beginning and end of the docstring:
+Python 在文档字符串的开头和结尾使用三引号：
 
 ```python
-"""This is a 
-multiline docstring."""
+"""这是一个
+多行文档字符串。"""
 print("Hello, World!")
 ```
 
-## References
+## 参考资料
 
 - [w3schools.com](https://www.w3schools.com/python/python_syntax.asp)

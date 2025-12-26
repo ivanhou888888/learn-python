@@ -1,69 +1,64 @@
-"""Function Definition
+"""函数定义
 
 @see: https://docs.python.org/3/tutorial/controlflow.html#defining-functions
 @see: https://www.thecodeship.com/patterns/guide-to-python-function-decorators/
 
-The keyword def introduces a function definition. It must be followed by the function name and the
-parenthesized list of formal parameters. The statements that form the body of the function start at
-the next line, and must be indented.
+关键字 def 引入函数定义。它后面必须跟着函数名和带括号的形式参数列表。
+构成函数体的语句从下一行开始，必须缩进。
 """
 
 
 def fibonacci_function_example(number_limit):
-    """Generate a Fibonacci series up to number_limit.
+    """生成一个不超过 number_limit 的斐波那契数列。
 
-    The first statement of the function body can optionally be a string literal; this string
-    literal is the function’s documentation string, or docstring. There are tools which use
-    docstrings to automatically produce online or printed documentation, or to let the user
-    interactively browse through code; it’s good practice to include docstrings in code that you
-    write, so make a habit of it.
+    函数体的第一条语句可以是一个字符串字面量；这个字符串字面量是函数的
+    文档字符串，或 docstring。有些工具使用文档字符串自动生成在线或打印文档，
+    或让用户交互式地浏览代码；在你编写的代码中包含文档字符串是一个好习惯，
+    所以养成这个习惯吧。
     """
 
-    # The execution of a function introduces a new symbol table used for the local variables of the
-    # function. More precisely, all variable assignments in a function store the value in the local
-    # symbol table; whereas variable references first look in the local symbol table, then in the
-    # local symbol tables of enclosing functions, then in the global symbol table, and finally in
-    # the table of built-in names. Thus, global variables cannot be directly assigned a value
-    # within a function (unless named in a global statement), although they may be referenced.
+    # 函数的执行引入了一个新的符号表，用于函数的局部变量。
+    # 更准确地说，函数中的所有变量赋值都将值存储在局部符号表中；
+    # 而变量引用首先在局部符号表中查找，然后在封闭函数的局部符号表中查找，
+    # 然后在全局符号表中查找，最后在内置名称表中查找。
+    # 因此，全局变量不能在函数内直接赋值（除非在 global 语句中命名），
+    # 尽管它们可以被引用。
     fibonacci_list = []
     previous_number, current_number = 0, 1
     while previous_number < number_limit:
-        # The statement result.append(a) calls a method of the list object result. A method is a
-        # function that ‘belongs’ to an object and is named obj.methodname, where obj is some
-        # object (this may be an expression), and methodname is the name of a method that is
-        # defined by the object’s type. Different types define different methods. Methods of
-        # different types may have the same name without causing ambiguity. (It is possible to
-        # define your own object types and methods, using classes, see Classes) The method
-        # append() shown in the example is defined for list objects; it adds a new element at
-        # the end of the list. In this example it is equivalent to result = result + [a], but
-        # more efficient.
+        # 语句 result.append(a) 调用列表对象 result 的一个方法。
+        # 方法是"属于"对象的函数，命名为 obj.methodname，其中 obj 是某个对象
+        # （这可能是一个表达式），methodname 是由对象类型定义的方法名称。
+        # 不同的类型定义不同的方法。不同类型的方法可以有相同的名称而不会引起歧义。
+        # （可以使用类定义自己的对象类型和方法，参见类）
+        # 示例中显示的 append() 方法是为列表对象定义的；它在列表末尾添加一个新元素。
+        # 在这个例子中，它等同于 result = result + [a]，但更高效。
         fibonacci_list.append(previous_number)
-        # This is multiple assignment statement. We make current number to be previous one and the
-        # sum of previous and current to be a new current.
+        # 这是多重赋值语句。我们让当前数字成为前一个数字，
+        # 前一个和当前数字的和成为新的当前数字。
         previous_number, current_number = current_number, previous_number + current_number
 
-    # The return statement returns with a value from a function. return without an expression
-    # argument returns None. Falling off the end of a function also returns None.
+    # return 语句从函数返回一个值。没有表达式参数的 return 返回 None。
+    # 从函数末尾掉落也返回 None。
     return fibonacci_list
 
 
 def test_function_definition():
-    """Function Definition"""
+    """函数定义"""
 
-    # Now call the function we just defined.
+    # 现在调用我们刚刚定义的函数。
     assert fibonacci_function_example(300) == [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233]
 
-    # A function definition introduces the function name in the current symbol table. The value of
-    # the function name has a type that is recognized by the interpreter as a user-defined function.
-    # This value can be assigned to another name which can then also be used as a function. This
-    # serves as a general renaming mechanism
+    # 函数定义在当前符号表中引入函数名。函数名的值具有解释器识别为
+    # 用户定义函数的类型。这个值可以赋给另一个名称，然后也可以用作函数。
+    # 这作为一种通用的重命名机制
     fibonacci_function_clone = fibonacci_function_example
     assert fibonacci_function_clone(300) == [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233]
 
-    # In Python, functions are first class citizens, they are objects and that means we can do a
-    # lot of useful stuff with them.
+    # 在 Python 中，函数是一等公民，它们是对象，这意味着我们可以用它们
+    # 做很多有用的事情。
 
-    # Assign functions to variables.
+    # 将函数赋给变量。
 
     def greet(name):
         return 'Hello, ' + name
@@ -72,7 +67,7 @@ def test_function_definition():
 
     assert greet_someone('John') == 'Hello, John'
 
-    # Define functions inside other functions.
+    # 在其他函数内部定义函数。
 
     def greet_again(name):
         def get_message():
@@ -83,7 +78,7 @@ def test_function_definition():
 
     assert greet_again('John') == 'Hello, John'
 
-    # Functions can be passed as parameters to other functions.
+    # 函数可以作为参数传递给其他函数。
 
     def greet_one_more(name):
         return 'Hello, ' + name
@@ -94,7 +89,7 @@ def test_function_definition():
 
     assert call_func(greet_one_more) == 'Hello, John'
 
-    # Functions can return other functions. In other words, functions generating other functions.
+    # 函数可以返回其他函数。换句话说，函数生成其他函数。
 
     def compose_greet_func():
         def get_message():
@@ -105,12 +100,12 @@ def test_function_definition():
     greet_function = compose_greet_func()
     assert greet_function() == 'Hello there!'
 
-    # Inner functions have access to the enclosing scope.
+    # 内部函数可以访问封闭作用域。
 
-    # More commonly known as a closure. A very powerful pattern that we will come across while
-    # building decorators. Another thing to note, Python only allows read access to the outer
-    # scope and not assignment. Notice how we modified the example above to read a "name" argument
-    # from the enclosing scope of the inner function and return the new function.
+    # 更常见的称为闭包。这是一个非常强大的模式，我们在构建装饰器时会遇到。
+    # 另一件需要注意的事情是，Python 只允许对外部作用域进行读访问，而不是赋值。
+    # 注意我们如何修改上面的示例，从内部函数的封闭作用域读取 "name" 参数
+    # 并返回新函数。
 
     def compose_greet_func_with_closure(name):
         def get_message():

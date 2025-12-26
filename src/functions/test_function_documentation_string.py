@@ -1,42 +1,40 @@
-"""Documentation Strings.
+"""文档字符串
 
 @see: https://docs.python.org/3/tutorial/controlflow.html#documentation-strings
 
-Here are some conventions about the content and formatting of documentation strings.
+这里是关于文档字符串内容和格式的一些约定。
 
-The first line should always be a short, concise summary of the object’s purpose. For brevity,
-it should not explicitly state the object’s name or type, since these are available by other means
-(except if the name happens to be a verb describing a function’s operation). This line should begin
-with a capital letter and end with a period.
+第一行应该始终是对象目的的简短、简洁的摘要。为了简洁，
+它不应该明确说明对象的名称或类型，因为这些可以通过其他方式获得
+（除非名称恰好是描述函数操作的动词）。这一行应该以大写字母开头，以句号结尾。
 
-If there are more lines in the documentation string, the second line should be blank, visually
-separating the summary from the rest of the description. The following lines should be one or more
-paragraphs describing the object’s calling conventions, its side effects, etc.
+如果文档字符串中有更多行，第二行应该是空白的，
+在视觉上将摘要与其余描述分开。以下行应该是一个或多个段落，
+描述对象的调用约定、副作用等。
 """
 
 
 def do_nothing():
-    """Do nothing, but document it.
+    """什么都不做，但要记录下来。
 
-    No, really, it doesn't do anything.
+    不，真的，它什么都不做。
     """
     pass
 
 
 def test_function_documentation_string():
-    """Test documentation string."""
+    """测试文档字符串。"""
 
-    # The Python parser does not strip indentation from multi-line string literals in Python, so
-    # tools that process documentation have to strip indentation if desired. This is done using the
-    # following convention. The first non-blank line after the first line of the string determines
-    # the amount of indentation for the entire documentation string. (We can’t use the first line
-    # since it is generally adjacent to the string’s opening quotes so its indentation is not
-    # apparent in the string literal.) Whitespace “equivalent” to this indentation is then stripped
-    # from the start of all lines of the string. Lines that are indented less should not occur, but
-    # if they occur all their leading whitespace should be stripped. Equivalence of whitespace
-    # should be tested after expansion of tabs (to 8 spaces, normally).
+    # Python 解析器不会从 Python 中的多行字符串字面量中去除缩进，
+    # 因此处理文档的工具必须在需要时去除缩进。这是使用以下约定完成的。
+    # 字符串第一行之后的第一个非空行确定整个文档字符串的缩进量。
+    # （我们不能使用第一行，因为它通常与字符串的开头引号相邻，
+    # 所以它的缩进在字符串字面量中不明显。）
+    # 然后从字符串所有行的开头去除与此缩进"等效"的空白。
+    # 缩进较少的行不应该出现，但如果出现，应该去除它们所有的前导空白。
+    # 空白的等效性应该在制表符扩展后测试（通常为 8 个空格）。
 
-    assert do_nothing.__doc__ == """Do nothing, but document it.
+    assert do_nothing.__doc__ == """什么都不做，但要记录下来。
 
-    No, really, it doesn't do anything.
+    不，真的，它什么都不做。
     """

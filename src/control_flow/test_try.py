@@ -1,22 +1,22 @@
-"""TRY statement
+"""TRY 语句
 
 @see: https://www.w3schools.com/python/python_try_except.asp
 
-"try" statement is used for exception handling.
-When an error occurs, or exception as we call it, Python will normally stop and generate an error
-message. These exceptions can be handled using the try statement.
+"try" 语句用于异常处理。
+当发生错误或我们所说的异常时，Python 通常会停止并生成错误消息。
+这些异常可以使用 try 语句来处理。
 
-The "try" block lets you test a block of code for errors.
-The "except" block lets you handle the error.
-The "else" block lets you execute the code if no errors were raised.
-The "finally" block lets you execute code, regardless of the result of the try- and except blocks.
+"try" 块让你测试一段代码是否有错误。
+"except" 块让你处理错误。
+"else" 块让你在没有引发错误时执行代码。
+"finally" 块让你执行代码，无论 try 和 except 块的结果如何。
 """
 
 
 def test_try():
-    """TRY statement"""
+    """TRY 语句"""
 
-    # The try block will generate an error, because x is not defined:
+    # try 块将生成一个错误，因为 x 未定义：
     exception_has_been_caught = False
 
     try:
@@ -27,8 +27,8 @@ def test_try():
 
     assert exception_has_been_caught
 
-    # You can define as many exception blocks as you want, e.g. if you want to execute a special
-    # block of code for a special kind of error:
+    # 你可以定义任意多个 except 块，例如，如果你想为特定类型的错误
+    # 执行特殊的代码块：
     exception_message = ''
 
     try:
@@ -39,8 +39,8 @@ def test_try():
 
     assert exception_message == 'Variable is not defined'
 
-    # You can use the else keyword to define a block of code to be executed
-    # if no errors were raised.
+    # 你可以使用 else 关键字定义一个代码块，
+    # 在没有引发错误时执行。
     message = ''
     # pylint: disable=broad-except
     try:
@@ -52,8 +52,7 @@ def test_try():
 
     assert message == 'Success.Nothing went wrong.'
 
-    # The finally block, if specified, will be executed regardless if the try block raises an
-    # error or not.
+    # finally 块，如果指定，将无论 try 块是否引发错误都会执行。
     message = ''
     try:
         # pylint: undefined-variable

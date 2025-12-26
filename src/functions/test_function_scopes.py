@@ -1,39 +1,36 @@
-"""Scopes and Namespaces.
+"""作用域和命名空间
 
 @see: https://docs.python.org/3/tutorial/classes.html#scopes-and-namespaces-example
 
-A NAMESPACE is a mapping from names to objects. Most namespaces are currently implemented as Python
-dictionaries, but that’s normally not noticeable in any way (except for performance), and it may
-change in the future. Examples of namespaces are: the set of built-in names (containing functions
-such as abs(), and built-in exception names); the global names in a module; and the local names
-in a function invocation. In a sense the set of attributes of an object also form a namespace.
-The important thing to know about namespaces is that there is absolutely no relation between names
-in different namespaces; for instance, two different modules may both define a function maximize
-without confusion — users of the modules must prefix it with the module name.
+命名空间是从名称到对象的映射。大多数命名空间目前实现为 Python 字典，
+但这通常不会以任何方式被注意到（除了性能），将来可能会改变。
+命名空间的例子有：内置名称集合（包含 abs() 等函数和内置异常名称）；
+模块中的全局名称；函数调用中的局部名称。
+从某种意义上说，对象的属性集合也形成一个命名空间。
+关于命名空间需要知道的重要事情是，不同命名空间中的名称之间绝对没有关系；
+例如，两个不同的模块可能都定义一个 maximize 函数而不会混淆——
+模块的用户必须在它前面加上模块名。
 
-By the way, we use the word attribute for any name following a dot — for example, in the expression
-z.real, real is an attribute of the object z. Strictly speaking, references to names in modules are
-attribute references: in the expression modname.func_name, modname is a module object and func_name
-is an attribute of it. In this case there happens to be a straightforward mapping between the
-module’s attributes and the global names defined in the module: they share the same namespace!
+顺便说一下，我们对点后面的任何名称使用"属性"这个词——例如，在表达式 z.real 中，
+real 是对象 z 的一个属性。严格来说，模块中名称的引用是属性引用：
+在表达式 modname.func_name 中，modname 是一个模块对象，func_name 是它的一个属性。
+在这种情况下，模块的属性和模块中定义的全局名称之间恰好有一个直接的映射：
+它们共享同一个命名空间！
 
-A SCOPE is a textual region of a Python program where a namespace is directly accessible.
-“Directly accessible” here means that an unqualified reference to a name attempts to find the name
-in the namespace.
+作用域是 Python 程序的一个文本区域，在这里命名空间可以直接访问。
+这里的"直接访问"意味着对名称的非限定引用尝试在命名空间中查找该名称。
 
-Although scopes are determined statically, they are used dynamically. At any time during execution,
-there are at least three nested scopes whose namespaces are directly accessible:
-- the innermost scope, which is searched first, contains the local names.
-- the scopes of any enclosing functions, which are searched starting with the nearest enclosing
-scope, contains non-local, but also non-global names.
-- the next-to-last scope contains the current module’s global names.
-- the outermost scope (searched last) is the namespace containing built-in names.
+虽然作用域是静态确定的，但它们是动态使用的。在执行期间的任何时候，
+至少有三个嵌套作用域，其命名空间可以直接访问：
+- 最内层作用域，首先被搜索，包含局部名称。
+- 任何封闭函数的作用域，从最近的封闭作用域开始搜索，包含非局部但也非全局的名称。
+- 倒数第二个作用域包含当前模块的全局名称。
+- 最外层作用域（最后搜索）是包含内置名称的命名空间。
 
-BE CAREFUL!!!
+注意！！！
 -------------
-Changing global or nonlocal variables from within an inner function might be a BAD
-practice and might lead to harder debugging and to more fragile code! Do this only if you know
-what you're doing.
+从内部函数更改全局或非局部变量可能是一个不好的做法，
+可能导致更难调试和更脆弱的代码！只有在你知道自己在做什么时才这样做。
 """
 
 # pylint: disable=invalid-name
@@ -41,67 +38,65 @@ test_variable = 'initial global value'
 
 
 def test_function_scopes():
-    """Scopes and Namespaces Example"""
+    """作用域和命名空间示例"""
 
-    # This is an example demonstrating how to reference the different scopes and namespaces, and
-    # how global and nonlocal affect variable binding:
+    # 这是一个演示如何引用不同作用域和命名空间的示例，
+    # 以及 global 和 nonlocal 如何影响变量绑定：
 
     # pylint: disable=redefined-outer-name
     test_variable = 'initial value inside test function'
 
     def do_local():
-        # Create variable that is only accessible inside current do_local() function.
+        # 创建只能在当前 do_local() 函数内部访问的变量。
         # pylint: disable=redefined-outer-name
         test_variable = 'local value'
         return test_variable
 
     def do_nonlocal():
-        # Address the variable from outer scope and try to change it.
+        # 访问外部作用域的变量并尝试更改它。
         # pylint: disable=redefined-outer-name
         nonlocal test_variable
         test_variable = 'nonlocal value'
         return test_variable
 
     def do_global():
-        # Address the variable from very global scope and try to change it.
+        # 访问最全局作用域的变量并尝试更改它。
         # pylint: disable=redefined-outer-name,global-statement
         global test_variable
         test_variable = 'global value'
         return test_variable
 
-    # On this level currently we have access to local for test_function_scopes() function variable.
+    # 在这个级别，我们目前可以访问 test_function_scopes() 函数的局部变量。
     assert test_variable == 'initial value inside test function'
 
-    # Do local assignment.
-    # It doesn't change global variable and variable from test_function_scopes() scope.
+    # 执行局部赋值。
+    # 它不会更改全局变量和 test_function_scopes() 作用域的变量。
     do_local()
     assert test_variable == 'initial value inside test function'
 
-    # Do non local assignment.
-    # It doesn't change global variable but it does change variable
-    # from test_function_scopes() function scope.
+    # 执行非局部赋值。
+    # 它不会更改全局变量，但会更改 test_function_scopes() 函数作用域的变量。
     do_nonlocal()
     assert test_variable == 'nonlocal value'
 
-    # Do global assignment.
-    # This one changes global variable but doesn't change variable from
-    # test_function_scopes() function scope.
+    # 执行全局赋值。
+    # 这个会更改全局变量，但不会更改 test_function_scopes() 函数作用域的变量。
     do_global()
     assert test_variable == 'nonlocal value'
 
 
 def test_global_variable_access():
-    """Testing global variable access from within a function"""
+    """测试从函数内部访问全局变量"""
 
-    # Global value of test_variable has been already changed by do_global() function in previous
-    # test so let's check that.
+    # test_variable 的全局值已经被前一个测试中的 do_global() 函数更改了，
+    # 所以让我们检查一下。
     # pylint: disable=global-statement
     global test_variable
     assert test_variable == 'global value'
 
-    # On this example you may see how accessing and changing global variables from within inner
-    # functions might make debugging more difficult and code to be less predictable. Since you
-    # might have expected that test_variable should still be equal to 'initial global value' but
-    # it was changed by "someone" and you need to know about the CONTEXT of who had changed that.
-    # So once again access global and non local scope only if you know what you're doing otherwise
-    # it might be considered as bad practice.
+    # 在这个例子中，你可以看到从内部函数访问和更改全局变量
+    # 可能会使调试更加困难，代码更不可预测。因为你可能期望
+    # test_variable 仍然等于 'initial global value'，但它被"某人"更改了，
+    # 你需要知道是谁更改了它的上下文。
+    # 所以再次强调，只有在你知道自己在做什么时才访问全局和非局部作用域，
+    # 否则可能被认为是不好的做法。

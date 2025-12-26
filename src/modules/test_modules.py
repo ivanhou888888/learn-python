@@ -1,31 +1,27 @@
-"""Modules.
+"""模块
 
 @see: https://docs.python.org/3/tutorial/modules.html
 
-As your program gets longer, you may want to split it into several files for easier maintenance.
-You may also want to use a handy function that you’ve written in several programs without copying
-its definition into each program.
+随着程序变长，你可能想把它分成几个文件以便于维护。
+你可能还想在多个程序中使用你编写的一个方便的函数，
+而不必将其定义复制到每个程序中。
 
-To support this, Python has a way to put definitions in a file and use them in a script or in an
-interactive instance of the interpreter. Such a file is called a module; definitions from a module
-can be imported into other modules or into the main module (the collection of variables that you
-have access to in a script executed at the top level and in calculator mode).
+为了支持这一点，Python 有一种方法可以将定义放在文件中，
+并在脚本或解释器的交互式实例中使用它们。这样的文件称为模块；
+模块中的定义可以导入到其他模块或主模块中
+（你在顶层执行的脚本和计算器模式中可以访问的变量集合）。
 
-A module is a file containing Python definitions and statements. The file name is the module name
-with the suffix .py appended. Within a module, the module’s name (as a string) is available as the
-value of the global variable __name__.
+模块是包含 Python 定义和语句的文件。文件名是模块名加上后缀 .py。
+在模块内，模块名（作为字符串）可作为全局变量 __name__ 的值使用。
 
-When the interpreter executes the import statement, it searches for module in a list of
-directories assembled from the following sources:
+当解释器执行 import 语句时，它在从以下来源组装的目录列表中搜索模块：
 
-- The directory from which the input script was run or the current directory if the interpreter is
-being run interactively
-- The list of directories contained in the PYTHONPATH environment variable, if it is set. (The
-format for PYTHONPATH is OS-dependent but should mimic the PATH environment variable.)
-- An installation-dependent list of directories configured at the time Python is installed
+- 运行输入脚本的目录，或者如果解释器以交互方式运行则为当前目录
+- PYTHONPATH 环境变量中包含的目录列表（如果已设置）。
+（PYTHONPATH 的格式取决于操作系统，但应该模仿 PATH 环境变量。）
+- 安装 Python 时配置的依赖于安装的目录列表
 
-The resulting search path is accessible in the Python variable sys.path, which is obtained from a
-module named sys:
+生成的搜索路径可在 Python 变量 sys.path 中访问，该变量从名为 sys 的模块获得：
 
 >>> import sys
 >>> sys.path
@@ -33,40 +29,37 @@ module named sys:
 @see: https://realpython.com/python-modules-packages/
 """
 
-# This does not enter the names of the functions defined in fibonacci_module directly in the
-# current symbol table; it only enters the module name fibonacci_module there.
+# 这不会将 fibonacci_module 中定义的函数名直接输入到当前符号表中；
+# 它只在那里输入模块名 fibonacci_module。
 import fibonacci_module
 
-# There is a variant of the import statement that imports names from a module directly into the
-# importing module’s symbol table. For example:
+# import 语句有一个变体，可以将模块中的名称直接导入到导入模块的符号表中。例如：
 
 # pylint: disable=reimported
 from fibonacci_module import fibonacci_at_position, fibonacci_smaller_than
 
-# There is even a variant to import all names that a module defines. This imports all names except
-# those beginning with an underscore (_). In most cases Python programmers do not use this facility
-# since it introduces an unknown set of names into the interpreter, possibly hiding some things you
-# have already defined.
+# 甚至有一个变体可以导入模块定义的所有名称。这会导入所有名称，
+# 除了以下划线 (_) 开头的名称。在大多数情况下，Python 程序员不使用此功能，
+# 因为它会将一组未知的名称引入解释器，可能会隐藏你已经定义的一些内容。
 # >>> from fibonacci_module import *
 
-# If the module name is followed by as, then the name following as is bound directly to the
-# imported module:
+# 如果模块名后面跟着 as，则 as 后面的名称直接绑定到导入的模块：
 import fibonacci_module as fibonacci_module_renamed
 
-# It can also be used when utilising from with similar effects:
+# 它也可以在使用 from 时使用，效果类似：
 from fibonacci_module import fibonacci_at_position as fibonacci_at_position_renamed
 
-# When a module named spam is imported, the interpreter first searches for a built-in module with
-# that name. If not found, it then searches for a file named spam.py in a list of directories
-# given by the variable sys.path. sys.path is initialized from these locations:
+# 当导入名为 spam 的模块时，解释器首先搜索具有该名称的内置模块。
+# 如果找不到，它会在变量 sys.path 给出的目录列表中搜索名为 spam.py 的文件。
+# sys.path 从以下位置初始化：
 #
-# - The directory containing the input script (or the current directory when no file is specified).
-# - PYTHONPATH (a list of directory names, with the same syntax as the shell variable PATH).
-# - The installation-dependent default.
+# - 包含输入脚本的目录（或未指定文件时的当前目录）。
+# - PYTHONPATH（目录名列表，语法与 shell 变量 PATH 相同）。
+# - 依赖于安装的默认值。
 
 
 def test_modules():
-    """Modules"""
+    """模块"""
 
     assert fibonacci_module.fibonacci_at_position(7) == 13
     assert fibonacci_at_position(7) == 13
@@ -77,12 +70,11 @@ def test_modules():
     assert fibonacci_smaller_than(100) == [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
     assert fibonacci_module_renamed.fibonacci_smaller_than(10) == [0, 1, 1, 2, 3, 5, 8]
 
-    # If you intend to use a function often you can assign it to a local name.
+    # 如果你打算经常使用一个函数，你可以将它赋给一个局部名称。
     fibonacci = fibonacci_module.fibonacci_smaller_than
     assert fibonacci(100) == [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
 
-    # The built-in function dir() is used to find out which names a module defines. It returns a
-    # sorted list of strings.
+    # 内置函数 dir() 用于找出模块定义了哪些名称。它返回一个排序的字符串列表。
     assert dir(fibonacci_module) == [
         '__builtins__',
         '__cached__',

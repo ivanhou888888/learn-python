@@ -1,65 +1,61 @@
-"""Multiple Inheritance
+"""多重继承
 
 @see: https://docs.python.org/3/tutorial/classes.html#multiple-inheritance
 
-Some classes may derive from multiple classes. This means that the derived class would have
-its attributes, along with the attributes of all the classes that it was derived from.
+某些类可能从多个类派生。这意味着派生类将具有其属性，
+以及它派生自的所有类的属性。
 """
 
 
 def test_multiple_inheritance():
-    """Multiple Inheritance"""
+    """多重继承"""
 
     # pylint: disable=too-few-public-methods
     class Clock:
-        """Clock class"""
+        """时钟类"""
 
         time = '11:23 PM'
 
         def get_time(self):
-            """Get current time
+            """获取当前时间
 
-            Method is hardcoded just for multiple inheritance illustration.
+            方法是硬编码的，仅用于多重继承说明。
             """
             return self.time
 
     # pylint: disable=too-few-public-methods
     class Calendar:
-        """Calendar class"""
+        """日历类"""
 
         date = '12/08/2018'
 
         def get_date(self):
-            """Get current date
+            """获取当前日期
 
-            Method is hardcoded just for multiple inheritance illustration.
+            方法是硬编码的，仅用于多重继承说明。
             """
             return self.date
 
-    # Python supports a form of multiple inheritance as well. A class definition with multiple
-    # base classes looks like this.
+    # Python 也支持一种多重继承形式。具有多个基类的类定义如下所示。
     class CalendarClock(Clock, Calendar):
-        """Class that uses multiple inheritance.
+        """使用多重继承的类。
 
-        For most purposes, in the simplest cases, you can think of the search for attributes
-        inherited from a parent class as depth-first, left-to-right, not searching twice in the same
-        class where there is an overlap in the hierarchy. Thus, if an attribute is not found in
-        CalendarClock, it is searched for in Clock, then (recursively) in the base classes of
-        Clock, and if it was not found there, it was searched for in Calendar, and so on.
+        对于大多数目的，在最简单的情况下，你可以将从父类继承的属性搜索
+        视为深度优先、从左到右，在层次结构中有重叠的地方不会在同一个类中搜索两次。
+        因此，如果在 CalendarClock 中找不到属性，则在 Clock 中搜索，
+        然后（递归地）在 Clock 的基类中搜索，如果在那里找不到，
+        则在 Calendar 中搜索，依此类推。
 
-        In fact, it is slightly more complex than that; the method resolution order changes
-        dynamically to support cooperative calls to super(). This approach is known in some other
-        multiple-inheritance languages as call-next-method and is more powerful than the super call
-        found in single-inheritance languages.
+        实际上，它比这稍微复杂一些；方法解析顺序动态变化以支持对 super() 的协作调用。
+        这种方法在其他一些多重继承语言中被称为 call-next-method，
+        比单继承语言中的 super 调用更强大。
 
-        Dynamic ordering is necessary because all cases of multiple inheritance exhibit one or more
-        diamond relationships (where at least one of the parent classes can be accessed through
-        multiple paths from the bottommost class). For example, all classes inherit from object,
-        so any case of multiple inheritance provides more than one path to reach object. To keep
-        the base classes from being accessed more than once, the dynamic algorithm linearizes the
-        search order in a way that preserves the left-to-right ordering specified in each class,
-        that calls each parent only once, and that is monotonic (meaning that a class can be
-        subclassed without affecting the precedence order of its parents).
+        动态排序是必要的，因为所有多重继承的情况都表现出一个或多个菱形关系
+        （其中至少一个父类可以通过从最底层类的多条路径访问）。
+        例如，所有类都继承自 object，所以任何多重继承的情况都提供了多条到达 object 的路径。
+        为了防止基类被访问多次，动态算法以一种保留每个类中指定的从左到右顺序、
+        只调用每个父类一次且是单调的（意味着一个类可以被子类化而不影响其父类的优先顺序）
+        的方式线性化搜索顺序。
         """
 
     calendar_clock = CalendarClock()

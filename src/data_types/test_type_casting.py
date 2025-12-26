@@ -1,27 +1,26 @@
-"""Type casting.
+"""类型转换
 
 @see: https://www.w3schools.com/python/python_casting.asp
 
-There may be times when you want to specify a type on to a variable. This can be done with casting.
-Python is an object-orientated language, and as such it uses classes to define data types,
-including its primitive types.
+有时你可能想要为变量指定一个类型。这可以通过类型转换来完成。
+Python 是一种面向对象的语言，因此它使用类来定义数据类型，
+包括其原始类型。
 
-Casting in python is therefore done using constructor functions:
+因此，Python 中的类型转换是使用构造函数完成的：
 
-- int() - constructs an integer number from an integer literal, a float literal (by rounding down
-to the previous whole number) literal, or a string literal (providing the string represents a
-whole number)
+- int() - 从整数字面量、浮点字面量（通过向下取整到前一个整数）
+或字符串字面量（前提是字符串表示一个整数）构造一个整数
 
-- float() - constructs a float number from an integer literal, a float literal or a string literal
-(providing the string represents a float or an integer)
+- float() - 从整数字面量、浮点字面量或字符串字面量
+（前提是字符串表示一个浮点数或整数）构造一个浮点数
 
-- str() - constructs a string from a wide variety of data types, including strings, integer
-literals and float literals
+- str() - 从各种数据类型构造一个字符串，包括字符串、
+整数字面量和浮点字面量
 """
 
 
 def test_type_casting_to_integer():
-    """Type casting to integer"""
+    """类型转换为整数"""
 
     assert int(1) == 1
     assert int(2.8) == 2
@@ -29,7 +28,7 @@ def test_type_casting_to_integer():
 
 
 def test_type_casting_to_float():
-    """Type casting to float"""
+    """类型转换为浮点数"""
 
     assert float(1) == 1.0
     assert float(2.8) == 2.8
@@ -38,7 +37,7 @@ def test_type_casting_to_float():
 
 
 def test_type_casting_to_string():
-    """Type casting to string"""
+    """类型转换为字符串"""
 
     assert str("s1") == 's1'
     assert str(2) == '2'
